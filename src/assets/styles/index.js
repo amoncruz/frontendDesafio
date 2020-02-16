@@ -24,3 +24,7 @@ export const CardHeader=styled.div`
   border-radius:6px;
   cursor:pointer;
 `;
+
+export const Title=styled.div`
+color:green;
+`;
