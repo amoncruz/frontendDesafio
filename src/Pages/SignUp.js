@@ -1,40 +1,23 @@
 import React from 'react'
-import {Table} from 'reactstrap'
+import {Table, Container,FormGroup,Form,Label,Input,Button} from 'reactstrap'
 
 
-const SignUp=()=>{
+const SignUp=({handleSubmit, setUser,user})=>{
 
     return(
-        <Table hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </Table>
+        <Container>
+            <Form className="form-login" onSubmit={(e)=>handleSubmit(e)}>
+                <FormGroup>
+                    <Label for="exampleEmail">Usuario</Label>
+                    <Input type="text" name="username" id="exampleEmail" placeholder="with a placeholder" onChange={(e)=>setUser({...user,username:e.target.value})} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="examplePassword">Senha</Label>
+                    <Input type="password" name="password" id="examplePassword" placeholder="password placeholder" onChange={(e)=>setUser({...user,password:e.target.value})} />
+                </FormGroup>
+                <Button type="submit">Submit</Button>
+            </Form>
+        </Container>
     );
 }
 

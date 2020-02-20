@@ -6,9 +6,6 @@ import { CardHeader } from '../assets/styles';
 import { qtdSemestres as vetorS } from '../utils/selectOptions';
 import NavBar from '../Components/NavBar';
 import axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
 
 const pessoas=["Amon","Cruz","Pereira"];
 const Coordenador=()=>{
@@ -18,6 +15,7 @@ const Coordenador=()=>{
        curso:{
            name:'',
            semestres:[
+               
            ]
        },
     });
@@ -73,7 +71,7 @@ const Coordenador=()=>{
      return(
          <>
          <NavBar/>
-         <Container>
+         <Container className="form-wrapper">
             <Form onSubmit={handleSubmit} className="form-matriz">
             {data.cursos && (
                 <FormGroup>

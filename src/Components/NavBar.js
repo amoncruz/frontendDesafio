@@ -19,41 +19,33 @@ const NavBar = (props) => {
 
   const toggle = () => setIsOpen(!isOpen);
 
+  
   return (
     <div>
       <Navbar className="nav-custom-color" expand="md">
         <NavbarBrand href="/">reactstrap</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          
+        <Nav className="mr-auto" navbar>
+          <NavItem>
+              <NavLink href="/components/">Home</NavLink>
+          </NavItem>
+        {localStorage.getItem("@TOKEN")==="ROLE_COORDENADOR" &&(
+          <>
             <NavItem>
-              <NavLink href="/components/">Components</NavLink>
+              <NavLink href="/matriz/">Matriz</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </Nav>
-          <NavbarText>Simple Text</NavbarText>
-        </Collapse>
-      </Navbar>
-    </div>
+          </>
+
+           )}    
+        </Nav>
+      </Collapse>
+    </Navbar>
+  </div>
   );
 }
 

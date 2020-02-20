@@ -11,7 +11,9 @@ const App=()=>{
     return(
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
+                <div className="content">
                 <Routes/>
+                </div>
             </PersistGate>
         </Provider>
     );
