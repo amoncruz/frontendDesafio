@@ -36,7 +36,7 @@ const NavBar = (props) => {
           <NavItem>	
               <NavLink href="/pagina_inicial">Home</NavLink>	
           </NavItem>	
-        {localStorage.getItem("@TOKEN")==="ROLE_COORDENADOR" &&(	
+        {localStorage.getItem("@TOKEN")!=="ROLE_USER" &&(	
           <>	
             <NavItem>	
               <NavLink href="/aluno">Cursos</NavLink>	
@@ -44,9 +44,11 @@ const NavBar = (props) => {
 
           </>	
 
-
            )}    	
-        </Nav>	
+        </Nav>
+        <div onClick={handleLogout} className="icon-sign-out">
+          <FontAwesomeIcon icon={faSignOutAlt}/>
+        </div>	
       </Collapse>	
     </Navbar>
   </div>

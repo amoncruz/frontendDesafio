@@ -30,6 +30,7 @@ const CadastroMatriz = (props) => {
 
   return (
       <>
+      <NavBar/>
     <Container>
     <div className="form-wrapper">
       <Nav tabs>

@@ -40,8 +40,7 @@ const CadastroDisciplinas=()=>{
         if(disciplina.nome!=='' && disciplina.nome.trim().length>0){
             Axios.post(`http://localhost:8080/api/cursos/${cursoId}/semestres/${semestre.numero}`,{nome:disciplina.nome,qtdCreditos:disciplina.qtdCreditos},{headers:{"authorization":localStorage.getItem("@TOKEN")}})
             .then(res=>{    
-                console.log(res);
-                if(res===200){
+                if(res.status===200){
                     swal("Usuário Atualizado com Sucesso!", {
                         icon: "success",
                       }).then(res=>{

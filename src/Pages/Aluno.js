@@ -20,7 +20,7 @@ const Aluno=()=>{
 
   return(
     <>
-
+  <NavBar/>
     <Container>
       <h2>Lista de Cursos</h2>
       {matrizes.map(curso=>{
@@ -52,6 +52,7 @@ const Aluno=()=>{
     }else{
       return(
       <>
+        <NavBar/>
         <Container>
           <Alert color="info">
             Não há nenhum curso cadastrado ainda! :/

@@ -75,6 +75,7 @@ const Admin=(props)=>{
 
     return(
         <>
+            <NavBar/>
         <Container>
             <Table hover>
                 <thead>
