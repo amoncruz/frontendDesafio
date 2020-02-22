@@ -1,109 +1,84 @@
 import React,{useState, useEffect} from 'react';
-import {Table, FormGroup, Label, Form,Input, Container,Button,Card,CardBody,UncontrolledCollapse} from 'reactstrap'
-import 'react-widgets/dist/css/react-widgets.css';
-import { Multiselect } from 'react-widgets'
-import { CardHeader } from '../assets/styles';
-import { qtdSemestres as vetorS } from '../utils/selectOptions';
-import NavBar from '../Components/NavBar';
+import {Container,Card,NavLink,NavItem,ListGroup,ListGroupItem, UncontrolledCollapse,Alert} from 'reactstrap'
 import axios from 'axios';
+import Disciplinas from '../Components/Disciplinas';
+import NavBar from '../Components/NavBar'
+import {Link} from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import EditDisciplinas from '../Components/EditDisciplinas';
+import EditCurso from '../Components/EditCurso';
+import EditSemestre from '../Components/EditSemestre';
 
-const pessoas=["Amon","Cruz","Pereira"];
 const Coordenador=()=>{
+  const [matrizes,setMatriz] = useState([]);
+  const [matrizChanges,setMatrizChanges]=useState(false);
 
-    const [professores,setProfessores]=useState([professores,setProfessores]);
-    const [matriz,setMatriz]=useState({
-       curso:{
-           name:'',
-           semestres:[
-               
-           ]
-       },
-    });
-    const [semestre,setSemestre] = useState([]);
-    const [disciplinas,setDisciplinas]=useState([])
-    const [data,setData] = useState({});
-    const [add,setAdd] = useState(false);
+  useEffect(()=>{
 
-    useEffect(()=>{
-        axios.get(`http://localhost:8080/api/cursos`,{headers:{"authorization": localStorage.getItem("@TOKEN")}}).then(res=>{
-            setData({...data,cursos:res.data});
-        })
+    axios.get('http://localhost:8080/api/cursos',{headers:{"authorization":localStorage.getItem("@TOKEN")}
+  }).then(res=>{
+    setMatriz(res.data);
+  })
+  },[matrizChanges])
 
-    },[])
+  if(matrizes.length>0){
 
-    useEffect(()=>{
-        if(disciplinas.length>0 && add===false){
-            setAdd(!add);
-        }
-        
-    },[disciplinas])
+  return(
+    <>
+  <NavBar/>
+    <Container>
+      <h2>Lista de Cursos</h2>
+      {matrizes.map(curso=>{
+        return(
+          <div key={curso.id}>
+        <ListGroup>
+           
+            <ListGroupItem style={{marginBottom:"1rem",cursor:"pointer"}} id={`toggler${curso.id}`}>{curso.nome}
+                <div className="actions">
+                    <EditCurso data={curso} setMatrizChanges={setMatrizChanges} matrizChanges={matrizChanges}/>
+                    <FontAwesomeIcon icon={faTrashAlt} className="delete-icon"/>
+                </div>
+            </ListGroupItem>
+        </ListGroup>
+          <UncontrolledCollapse toggler={`#toggler${curso.id}`} style={{marginBottom:"1rem"}}>
+            <Card style={{border:0}}>
+                {curso.semestres.map(semestre=>{   
+                    return(
+                      <>
+                        <div className="semestre">
+                            <h6>Semestre {semestre.numero}</h6> 
+                            <div className="actions">
+                            <EditSemestre data={semestre} cursoId={curso.id} setMatrizChanges={setMatrizChanges} matrizChanges={matrizChanges}/>                                
+                            <FontAwesomeIcon icon={faTrashAlt} className="delete-icon"/>
+                            </div>
+                        </div>
+                        <Disciplinas semestre={semestre} setMatrizChanges={setMatrizChanges} matrizChanges={matrizChanges}/>
+                      </>
+                    )
+                })}
+            </Card>
+          </UncontrolledCollapse>
+          </div>
+        )
+      } )}
+          
+    </Container>
+  </>
+  );
 
-    useEffect(()=>{
-        console.log(semestre);
-    },[semestre])
-
-    useEffect(()=>{
-        console.log(matriz);
-    },[matriz])
-
-    const handleDiscplinasChange=(value)=>{
-        // setSemestre([...semestre,value]);
-        // let semestreName=`semestre${index}`;
-        setDisciplinas(value);
-       
-    }
-
-    const addSemestre=()=>{
-        setSemestre([...semestre,{disciplinas}])
-    }
-
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        // axios.post(`http://localhost:8080/martriz`,{matriz},{headers:{"authorization":localStorage.getItem("@TOKEN")}})
-        setMatriz({...matriz,curso:{semestres:[semestre]}});
-
-    }
-
-    const handleAdd=()=>{
-        setAdd(!add);
-    }
-    
-     return(
-         <>
-         <Container className="form-wrapper">
-            <Form onSubmit={handleSubmit} className="form-matriz">
-            {data.cursos && (
-                <FormGroup>
-                    <Label for="examplePassword">Selecione um Curso</Label>
-                    <Input type="select" name="select" id="exampleSelect" onChange={(e)=>setMatriz({...matriz,curso:{nome:e.target.value}})}>
-                       <option value=""></option>
-                        {data.cursos.map(curso=>{
-                            return(
-                                <option key={curso.id} value={curso.nome}>{curso.nome}</option>
-                            );
-                        })}
-                    </Input>
-                </FormGroup>
-                )}
-
-                {matriz.curso.name!=='' &&(
-                    <>
-                    <FormGroup>
-                        <Label>Selecione as disciplinas</Label>
-                        <Multiselect data={pessoas}  onChange={(val)=>handleDiscplinasChange(val)}/>
-                    </FormGroup>
-        
-                    <Button style={{marginBottom:"0.8rem"}} onClick={(e)=>addSemestre(e)} disabled={!add}>Add Matriz</Button>
-                    </>
-                 )}
-
-            <Button type="submit">Processar</Button>
-            </Form>
+    }else{
+      return(
+      <>
+        <NavBar/>
+        <Container>
+          <Alert color="info">
+            Não há nenhum curso cadastrado ainda! :/
+          </Alert>
         </Container>
-        </>
-   );
-   
-
+      </>
+    );
+    }
 }
 
 export default Coordenador;

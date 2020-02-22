@@ -65,6 +65,45 @@
     ;
 }
 
+.disciplinas{
+    display: flex;
+    padding: 0.1rem 0.4rem;
+    .actions{
+        margin-left:4rem;
+    }
+
+    &:hover{
+        background: rgba(0,0,0,0.15);
+    }
+}
+
+.edit-icon{
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.semestre{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.1rem 0.4rem;
+
+    &:hover{
+        background-color: rgba(0,0,0,0.15);
+    }
+}
+
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+
+    .actions{
+        width: 35px;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 .plus-icon{
     color:white;
     font-size: 1.4rem;    
