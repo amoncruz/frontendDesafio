@@ -28,3 +28,7 @@ export const CardHeader=styled.div`
 export const Title=styled.div`
 color:green;
 `;
+
+export const Creditos=styled.div`
+font-weight:bold;
+`;

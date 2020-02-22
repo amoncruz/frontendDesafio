@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {ListGroupItem,ListGroup} from 'reactstrap'
+import { Creditos } from '../assets/styles';
 
 const Disciplinas=({semestre})=>{
 
@@ -7,16 +7,16 @@ const Disciplinas=({semestre})=>{
 
     useEffect(()=>{
         setDisciplinas(semestre.disciplinas);
-        console.log(semestre.disciplinas);
     },[])
     return(
-        <ListGroup>
+        <ul>
         {disciplinas.map(disciplina=>{ 
+            console.log(disciplina);
                 return(         
-                    <ListGroupItem style={{marginBottom:"1rem",cursor:"pointer"}}>{disciplina.nome}</ListGroupItem>
-                  )   
+                        <li style={{marginBottom:"1rem",cursor:"pointer"}}>{disciplina.nome} - {disciplina.qtdCreditos}</li>
+                )   
         })}
-        </ListGroup>  
+        </ul>  
     );
 }
 

@@ -3,7 +3,7 @@ import {Table, Container,FormGroup,Form,Label,Input,Button} from 'reactstrap'
 
 
 const SignUp=({handleSubmit, setUser,user})=>{
-
+  
     return(
         <Container>
             <Form className="form-login" onSubmit={(e)=>handleSubmit(e)}>
