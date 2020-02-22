@@ -27,7 +27,28 @@ const NavBar = (props) => {
 
   return (
     <div>
+      <Navbar className="nav-custom-color" expand="md">	
+        <NavbarBrand href="/">reactstrap</NavbarBrand>	
+        <NavbarToggler onClick={toggle} />	
+        <Collapse isOpen={isOpen} navbar>	
 
+        <Nav className="mr-auto" navbar>	
+          <NavItem>	
+              <NavLink href="/pagina_inicial">Home</NavLink>	
+          </NavItem>	
+        {localStorage.getItem("@TOKEN")==="ROLE_COORDENADOR" &&(	
+          <>	
+            <NavItem>	
+              <NavLink href="/aluno">Cursos</NavLink>	
+            </NavItem>	
+
+          </>	
+
+
+           )}    	
+        </Nav>	
+      </Collapse>	
+    </Navbar>
   </div>
   );
 }

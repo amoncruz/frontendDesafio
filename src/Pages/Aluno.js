@@ -4,7 +4,6 @@ import axios from 'axios';
 import Disciplinas from '../Components/Disciplinas';
 import NavBar from '../Components/NavBar'
 import {Link} from 'react-router-dom'
-import { ProgressPlugin } from 'webpack';
 
 const Aluno=()=>{
   const [matrizes,setMatriz] = useState([]);
