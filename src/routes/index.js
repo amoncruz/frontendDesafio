@@ -10,6 +10,7 @@ import CadastroDisciplinas from '../Pages/CadastroDisciplinas';
 import CadastroMatriz from '../Pages/CadastroMatriz';
 import ConsultaDadosMatriz from '../Pages/Consulta';
 import PaginaInicial from '../Pages/PaginaInicial';
+import Axios from 'axios';
 
 const isAuthenticated=()=>{
     if(localStorage.getItem("@TOKEN")){
@@ -19,6 +20,13 @@ const isAuthenticated=()=>{
 }
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
+
+    window.addEventListener('storage', function(){
+    
+    localStorage.clear();
+        
+    })
+
     return (<Route {...rest} render={props =>
         isAuthenticated() ?
             (
@@ -46,9 +54,6 @@ const CommonRoute = ({ component: Component, ...rest }) =>
 
 const Routes = () =>{
 
-    window.addEventListener('storage', function(){
-        console.log("localstorage changed!");
-    })
     return(
             <Router>
                 <Switch>
@@ -60,7 +65,7 @@ const Routes = () =>{
                     <ProtectedRoute path="/curso" component={CadastroCurso}/>
                     <ProtectedRoute path="/disciplina" component={CadastroDisciplinas}/>
                     {localStorage.getItem("@ROLE")==="ROLE_COORDENADOR" &&(
-                    <ProtectedRoute path="/matriz" component={CadastroMatriz}/>
+                     <ProtectedRoute path="/matriz" component={CadastroMatriz}/>
                     )}
                     <ProtectedRoute path="/consulta" component={ConsultaDadosMatriz}/>
                   

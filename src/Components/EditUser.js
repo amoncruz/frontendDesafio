@@ -3,17 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import {Modal,ModalBody,ModalFooter,ModalHeader,Button,Form,Input,FormGroup,Label} from 'reactstrap'
 import Axios from 'axios';
+import swal from 'sweetalert';
 
-const EditUser=({data})=>{
+
+const EditUser=({data,setUserChanges,userChanges})=>{
     const [user,setUser]=useState();
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
     const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={toggle}>&times;</button>;
 
-
     useEffect(()=>{
         setUser({username:data.username,role:{name:"ROLE_USER",description:"ROLE_USER"}});
     },[])
+
     const handleSubmit=(e)=>{
         e.preventDefault();
         let usuario={
@@ -22,7 +24,16 @@ const EditUser=({data})=>{
             role:user.role
         }
         Axios.put(`http://localhost:8080/api/v1/users`,usuario,{headers:{"authorization":localStorage.getItem("@TOKEN")}})
-        .then(res=>console.log(res))
+        .then(res=>{
+            if(res.status===200){
+                swal("Usuário Atualizado com Sucesso!", {
+                    icon: "success",
+                  }).then(res=>{
+                    toggle();
+                    setUserChanges(!userChanges);
+                })
+            }
+        })
     }
 
     const handleRoleChange=(e)=>{
@@ -31,7 +42,6 @@ const EditUser=({data})=>{
             name:value,
             description:value
         }
-        console.log("ROLE CHANGED");
         setUser({...user,role:role})
     }
 

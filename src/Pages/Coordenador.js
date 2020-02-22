@@ -25,7 +25,7 @@ const Coordenador=()=>{
     const [add,setAdd] = useState(false);
 
     useEffect(()=>{
-        axios.get(`http://localhost:8080/curso/cursos`,{headers:{"authorization": localStorage.getItem("@TOKEN")}}).then(res=>{
+        axios.get(`http://localhost:8080/api/cursos`,{headers:{"authorization": localStorage.getItem("@TOKEN")}}).then(res=>{
             setData({...data,cursos:res.data});
         })
 
@@ -70,7 +70,6 @@ const Coordenador=()=>{
     
      return(
          <>
-         <NavBar/>
          <Container className="form-wrapper">
             <Form onSubmit={handleSubmit} className="form-matriz">
             {data.cursos && (

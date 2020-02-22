@@ -7,9 +7,8 @@ const Login=(props)=>{
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        console.log(user)
         Axios.post(`http://localhost:8080/login`,{username:user.username,password:user.password}).then(res=>{
-           console.log(res);
+          
             if(res.status==200){       
                 localStorage.setItem("@TOKEN",res.data.token);
                 localStorage.setItem("@ROLE",res.data.role);
