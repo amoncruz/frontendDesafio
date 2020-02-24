@@ -10,7 +10,7 @@
 
 .form-wrapper{
     background: white;
-    width: max-content;
+    width: 100%;
     padding: 1rem;
     border-radius: 6px;
     -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.15);
@@ -29,6 +29,17 @@
     -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.15);
     -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.15);
     box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.15);
+}
+
+.container-matriz{
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    align-items: center;
+}
+
+.matriz-tabs-1{
+    margin-right: 0 !important;
 }
 
 .btn-plus{

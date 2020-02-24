@@ -5,7 +5,7 @@ import {Modal,ModalBody,ModalFooter,ModalHeader,Button,Form,Input,FormGroup,Labe
 import Axios from 'axios';
 import swal from 'sweetalert';
 
-const EditSemestre=({data,cursoId})=>{
+const EditSemestre=({data,cursoId,render,setRender})=>{
     const [semestre,setSemestre]=useState({numero:''});
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -13,7 +13,7 @@ const EditSemestre=({data,cursoId})=>{
 
     useEffect(()=>{
         setSemestre({numero:data.numero});
-    },[])
+    },[data])
 
     const handleSubmit=(e)=>{
         e.preventDefault();
@@ -28,6 +28,7 @@ const EditSemestre=({data,cursoId})=>{
                     icon: "success",
                   }).then(res=>{
                     toggle();
+                    setRender(!render);
                 })
             }
         })

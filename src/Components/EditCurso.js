@@ -6,7 +6,7 @@ import Axios from 'axios';
 import swal from 'sweetalert';
 
 
-const EditCurso=({data,setMatrizChanges,matrizChanges})=>{
+const EditCurso=({data,render,setRender})=>{
     const [curso,setCurso]=useState({nome:''});
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -29,6 +29,7 @@ const EditCurso=({data,setMatrizChanges,matrizChanges})=>{
                     icon: "success",
                   }).then(res=>{
                     toggle();
+                    setRender(!render);
                 })
             }
         })

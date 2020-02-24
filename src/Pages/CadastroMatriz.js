@@ -34,7 +34,7 @@ const CadastroMatriz = (props) => {
     <Container>
     <div className="form-wrapper">
       <Nav tabs>
-        <NavItem>
+        <NavItem className="matriz-tabs-1">
           <NavLink
             className={classnames({ active: activeTab === '1' })}
             onClick={() => { toggle('1'); }}
@@ -56,7 +56,6 @@ const CadastroMatriz = (props) => {
         <Row>
             <Col sm="12">
               <Card body>
-                <CardTitle>Cadastro Curso</CardTitle>
                 <CadastroCurso/>
               </Card>
             </Col>
@@ -66,7 +65,6 @@ const CadastroMatriz = (props) => {
           <Row>
             <Col sm="12">
               <Card body>
-                <CardTitle>Cadastro Disciplina</CardTitle>
                 <CadastroDisciplinas />
               </Card>
             </Col>

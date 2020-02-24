@@ -6,13 +6,12 @@ import NavBar from '../Components/NavBar'
 import {Link} from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import EditDisciplinas from '../Components/EditDisciplinas';
 import EditCurso from '../Components/EditCurso';
 import EditSemestre from '../Components/EditSemestre';
 
 const Coordenador=()=>{
   const [matrizes,setMatriz] = useState([]);
-  const [matrizChanges,setMatrizChanges]=useState(false);
+  const [render,setRender]=useState(false);
 
   useEffect(()=>{
 
@@ -20,7 +19,7 @@ const Coordenador=()=>{
   }).then(res=>{
     setMatriz(res.data);
   })
-  },[matrizChanges])
+  },[render])
 
   if(matrizes.length>0){
 
@@ -36,7 +35,7 @@ const Coordenador=()=>{
            
             <ListGroupItem style={{marginBottom:"1rem",cursor:"pointer"}} id={`toggler${curso.id}`}>{curso.nome}
                 <div className="actions">
-                    <EditCurso data={curso} setMatrizChanges={setMatrizChanges} matrizChanges={matrizChanges}/>
+                    <EditCurso data={curso} render={render} setRender={setRender}/>
                     <FontAwesomeIcon icon={faTrashAlt} className="delete-icon"/>
                 </div>
             </ListGroupItem>
@@ -49,11 +48,11 @@ const Coordenador=()=>{
                         <div className="semestre">
                             <h6>Semestre {semestre.numero}</h6> 
                             <div className="actions">
-                            <EditSemestre data={semestre} cursoId={curso.id} setMatrizChanges={setMatrizChanges} matrizChanges={matrizChanges}/>                                
+                            <EditSemestre data={semestre} cursoId={curso.id}  render={render} setRender={setRender}/>                                
                             <FontAwesomeIcon icon={faTrashAlt} className="delete-icon"/>
                             </div>
                         </div>
-                        <Disciplinas semestre={semestre} setMatrizChanges={setMatrizChanges} matrizChanges={matrizChanges}/>
+                        <Disciplinas semestre={semestre} render={render} setRender={setRender} />
                       </>
                     )
                 })}

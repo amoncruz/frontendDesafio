@@ -3,19 +3,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import EditDisciplinas from './EditDisciplinas';
 
-const Disciplinas=({semestre,setMatrizChanges,matrizChanges})=>{
+const Disciplinas=({semestre,setRender,render})=>{
 
     const[disciplinas,setDisciplinas]=useState([]);
 
-    const[matrizHandler,setMatrizHandlerChanges]=useState(false);
-
     useEffect(()=>{
         setDisciplinas(semestre.disciplinas);
-    },[])
+    },[semestre])
 
-    useEffect(()=>{
-        setMatrizChanges(!matrizChanges);
-    },[matrizHandler])
+
+    const handleRender=()=>{
+        setRender(!render);
+    }
+
 
     if(localStorage.getItem("@ROLE")!=="ROLE_COORDENADOR"){
         return(
@@ -39,7 +39,7 @@ const Disciplinas=({semestre,setMatrizChanges,matrizChanges})=>{
                            
                             <li style={{marginBottom:"1rem",cursor:"pointer"}} className="disciplinas">{disciplina.nome} - {disciplina.qtdCreditos}
                             <div className="actions">
-                                <EditDisciplinas data={disciplina} semestreId={semestre.id} setMatrizHandlerChanges={setMatrizHandlerChanges} matrizHandler={matrizHandler}/>
+                                <EditDisciplinas data={disciplina} semestreId={semestre.id} handleRender={handleRender} />
                                 <FontAwesomeIcon icon={faTrashAlt} className="delete-icon"/>
                              </div>
                             </li>

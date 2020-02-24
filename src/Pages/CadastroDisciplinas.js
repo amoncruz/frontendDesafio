@@ -53,7 +53,7 @@ const CadastroDisciplinas=()=>{
     
     if(cursos.length>0){
     return(
-    <Container>
+    <Container className="container-matriz">
         <Form className="form-login" onSubmit={(e)=>handleSubmit(e)}>
             <FormGroup>
                 <Label>Curso</Label>

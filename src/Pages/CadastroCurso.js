@@ -46,7 +46,7 @@ const CadastroCurso=()=>{
     }
     
     return(
-    <Container>
+    <Container className="container-matriz">
         <Form className="form-login" onSubmit={(e)=>handleSubmit(e)}>
             <FormGroup>
                 <Label for="exampleEmail">Curso</Label>

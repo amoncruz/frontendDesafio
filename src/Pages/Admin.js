@@ -114,9 +114,6 @@ const Admin=(props)=>{
                 <ModalBody>
                     <SignUp handleSubmit={handleSubmit} setUser={setUser} user={user}/>
                 </ModalBody>
-                <ModalFooter>
-                <Button color="primary" onClick={toggle}>Criar</Button>{' '}
-                </ModalFooter>
             </Modal>
         </Container>
         </>

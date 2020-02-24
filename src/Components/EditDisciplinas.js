@@ -6,7 +6,7 @@ import Axios from 'axios';
 import swal from 'sweetalert';
 
 
-const EditDisciplinas=({data,semestreId,setMatrizHandlerChanges,matrizHandler})=>{
+const EditDisciplinas=({data,semestreId,handleRender})=>{
     const [disciplina,setDisciplina]=useState({nome:'',qtdCreditos:'' });
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -32,7 +32,7 @@ const EditDisciplinas=({data,semestreId,setMatrizHandlerChanges,matrizHandler})=
                     icon: "success",
                   }).then(res=>{
                     toggle();
-                    setMatrizHandlerChanges(!matrizHandler);
+                    handleRender();
                 })
             }
         })
